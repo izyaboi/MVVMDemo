@@ -14,49 +14,16 @@ public class Person_ implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("firstname")
     @Expose
-    private String firstname;
+    public String firstname;
     @SerializedName("lastname")
     @Expose
-    private String lastname;
+    public String lastname;
     @SerializedName("image")
     @Expose
-    private String image;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    public String image;
     @Override
     public int describeContents() {
         return 0;

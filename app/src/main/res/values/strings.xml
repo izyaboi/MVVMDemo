@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MVVMDemo</string>
+    <string name="default_info_message">load persons ...</string>
+    <string name="text_empty_persons">no persons</string>
+    <string name="error_loading_person">Could not load persons</string>
 </resources>
