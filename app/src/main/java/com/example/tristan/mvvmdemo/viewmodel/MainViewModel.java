@@ -8,7 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 
-import com.example.tristan.mvvmdemo.App;
+import com.example.tristan.mvvmdemo.DemoApplication;
 import com.example.tristan.mvvmdemo.R;
 import com.example.tristan.mvvmdemo.model.ApiService;
 import com.example.tristan.mvvmdemo.model.Person;
@@ -59,7 +59,7 @@ public class MainViewModel implements ViewModel {
         infoMessageVisibility.set(View.INVISIBLE);
 
         if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
-        App application = App.get(context);
+        DemoApplication application = DemoApplication.get(context);
         ApiService apiService = application.getApiService();
         subscription = apiService.getUser()
                 .observeOn(AndroidSchedulers.mainThread())

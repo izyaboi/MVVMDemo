@@ -12,13 +12,13 @@ import rx.schedulers.Schedulers;
  * Created by Tristan on 04.05.2017.
  */
 
-public class App extends Application {
+public class DemoApplication extends Application {
 
     private ApiService apiService;
     private Scheduler defaultSubscribeScheduler;
 
-    public static App get(Context context) {
-        return (App) context.getApplicationContext();
+    public static DemoApplication get(Context context) {
+        return (DemoApplication) context.getApplicationContext();
     }
 
     public ApiService getApiService() {
