@@ -42,8 +42,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
 
-    //Circle Image View
-    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     //Rx Java & Android
     compile 'io.reactivex:rxandroid:1.2.1'
@@ -55,4 +53,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
 
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
 }

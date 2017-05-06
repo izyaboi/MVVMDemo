@@ -1,8 +1,10 @@
 package com.example.tristan.mvvmdemo.viewmodel;
 
 import android.content.Context;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 
@@ -27,6 +29,7 @@ public class MainViewModel implements ViewModel {
     public ObservableInt infoMessageVisibility;
     public ObservableInt progressVisibility;
     public ObservableInt recyclerViewVisibility;
+    public ObservableBoolean isLoading;
 
 
     public ObservableField<String> infoMessage;
@@ -42,6 +45,7 @@ public class MainViewModel implements ViewModel {
         infoMessageVisibility = new ObservableInt(View.VISIBLE);
         progressVisibility = new ObservableInt(View.INVISIBLE);
         recyclerViewVisibility = new ObservableInt(View.INVISIBLE);
+        isLoading = new ObservableBoolean(false);
         infoMessage = new ObservableField<>(context.getString(R.string.default_info_message));
     }
 
@@ -65,6 +69,7 @@ public class MainViewModel implements ViewModel {
                     public void onCompleted() {
                         if (dataListener != null) dataListener.onDataChanged(persons);
                         progressVisibility.set(View.INVISIBLE);
+                        isLoading.set(false);
                         if (!persons.getPersons().isEmpty()) {
                             recyclerViewVisibility.set(View.VISIBLE);
                         } else {
@@ -77,6 +82,7 @@ public class MainViewModel implements ViewModel {
                     public void onError(Throwable error) {
                         Log.e(TAG, "Error loading persons ", error);
                         progressVisibility.set(View.INVISIBLE);
+                        isLoading.set(false);
                         infoMessage.set(context.getString(R.string.error_loading_person));
                         infoMessageVisibility.set(View.VISIBLE);
                     }
@@ -87,6 +93,17 @@ public class MainViewModel implements ViewModel {
                         MainViewModel.this.persons = persons;
                     }
                 });
+    }
+
+    public SwipeRefreshLayout.OnRefreshListener getOnRefreshListener() {
+        return new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                progressVisibility.set(View.INVISIBLE);
+                isLoading.set(true);
+                loadUser();
+            }
+        };
     }
 
     public interface DataListener {

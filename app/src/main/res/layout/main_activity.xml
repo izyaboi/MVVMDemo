@@ -22,12 +22,17 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_below="@id/toolbar"
+            android:layout_alignParentLeft="true">
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -41,6 +46,7 @@
                 android:id="@+id/text_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="@dimen/vertical_margin"
                 android:layout_marginRight="@dimen/vertical_margin"
@@ -52,18 +58,28 @@
                 app:visibility="@{viewModel.infoMessageVisibility}" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/vertical_margin_half"
-            android:paddingTop="@dimen/vertical_margin_half"
-            android:scrollbars="vertical"
-            app:visibility="@{viewModel.recyclerViewVisibility}"
-            android:layout_below="@+id/toolbar" />
+            android:layout_below="@id/toolbar"
+            android:layout_height="wrap_content"
+            app:refreshing="@{viewModel.isLoading}"
+            app:onRefreshListener="@{viewModel.onRefreshListener}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/vertical_margin_half"
+                android:paddingTop="@dimen/vertical_margin_half"
+                android:scrollbars="vertical"
+                app:visibility="@{viewModel.recyclerViewVisibility}" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 
